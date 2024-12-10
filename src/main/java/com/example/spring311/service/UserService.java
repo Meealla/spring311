@@ -1,19 +1,17 @@
 package com.example.spring311.service;
 
-
-
 import com.example.spring311.model.User;
 
 import java.util.List;
 
 public interface UserService {
-    List<User> getAllUsers();
+    List<User> getAllUser();
 
-    User getByIdUser(Long id);
+    void createUser(User user);
 
-    void save(User user);
+    void updateUser(Long id, User user);
 
-    void update(Long id, User updateUser);
+    void deleteUser(Long id);
 
-    void delete(Long id);
+    User showUser(Long id);
 }

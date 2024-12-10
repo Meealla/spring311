@@ -5,34 +5,30 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "age")
+    private int age;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "email")
-    private String email;
-
     public User() {
-
     }
 
-    public User(String name, String email) {
+    public User(String name, int age, Long id) {
         this.name = name;
-        this.email = email;
+        this.age = age;
+        this.id = id;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -43,21 +39,25 @@ public class User {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public int getAge() {
+        return age;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+               "name='" + name + '\'' +
+               ", age=" + age +
+               ", id=" + id +
+               '}';
     }
 
     @Override
@@ -65,15 +65,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name)
-                && Objects.equals(email, user.email);
+        return age == user.age && id == user.id && Objects.equals(name, user.name);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        return result;
+        return Objects.hash(name, age, id);
     }
+
 }
